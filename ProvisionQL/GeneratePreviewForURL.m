@@ -281,7 +281,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         NSData *codesignEntitlementsData = nil;
         NSImage *appIcon = nil;
 
-        if ([dataType isEqualToString:kDataType_ipa]) {
+        if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa]) {
             // get the embedded provisioning & plist from an app archive using: unzip -u -j -d <currentTempDirFolder> <URL> <files to unzip>
             NSTask *unzipTask = [NSTask new];
 			[unzipTask setLaunchPath:@"/usr/bin/unzip"];
@@ -343,7 +343,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         id value = nil;
         NSString *synthesizedValue = nil;
 
-        if ([dataType isEqualToString:kDataType_ipa]) {
+        if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa]) {
             [synthesizedInfo setObject:@"App info" forKey:@"AppInfoTitle"];
         } else if ([dataType isEqualToString:kDataType_app_extension]) {
             [synthesizedInfo setObject:@"App extension info" forKey:@"AppInfoTitle"];

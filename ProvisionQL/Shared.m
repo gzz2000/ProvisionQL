@@ -66,7 +66,7 @@ NSImage *imageFromApp(NSURL *URL, NSString *dataType, NSString *fileName) {
 
         NSURL *appIconFullURL = [appURL URLByAppendingPathComponent:appIconFullName];
         appIcon = [[NSImage alloc] initWithContentsOfURL:appIconFullURL];
-    } else if([dataType isEqualToString:kDataType_ipa]) {
+    } else if([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa]) {
         // get the embedded icon from an app arcive using: unzip -p <URL> 'Payload/*.app/<fileName>' (piped to standard output)
         NSTask *unzipTask = [NSTask new];
         [unzipTask setLaunchPath:@"/usr/bin/unzip"];

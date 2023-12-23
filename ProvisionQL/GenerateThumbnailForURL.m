@@ -45,7 +45,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
                     appPlist = [NSData dataWithContentsOfURL:[appsDir URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/Info.plist", dirFiles[0]]]];
                 }
             }
-        } else if([dataType isEqualToString:kDataType_ipa]) {
+        } else if([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa]) {
             // get the embedded plist from an app archive using: unzip -p <URL> 'Payload/*.app/Info.plist' (piped to standard output)
             NSTask *unzipTask = [NSTask new];
             [unzipTask setLaunchPath:@"/usr/bin/unzip"];
@@ -67,7 +67,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
         }
 
         NSDictionary *propertiesDict = nil;
-        if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_xcode_archive]) {
+        if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa] || [dataType isEqualToString:kDataType_xcode_archive]) {
             NSDictionary *appPropertyList = [NSPropertyListSerialization propertyListWithData:appPlist options:0 format:NULL error:NULL];
             NSString *iconName = mainIconNameForApp(appPropertyList);
             appIcon = imageFromApp(URL, dataType, iconName);
@@ -133,7 +133,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
             NSGraphicsContext *_graphicsContext = [NSGraphicsContext graphicsContextWithCGContext:(void *)_context flipped:NO];
 
             [NSGraphicsContext setCurrentContext:_graphicsContext];
-            if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_xcode_archive]) {
+            if ([dataType isEqualToString:kDataType_ipa] || [dataType isEqualToString:kDataType_tipa] || [dataType isEqualToString:kDataType_xcode_archive]) {
                 [appIcon drawInRect:renderRect];
             } else {
                 [appIcon drawInRect:renderRect];

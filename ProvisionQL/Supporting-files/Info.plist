@@ -12,6 +12,7 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.apple.itunes.ipa</string>
+				<string>com.opa334.trollstore.tipa</string>
 				<string>com.apple.iphone.mobileprovision</string>
 				<string>com.apple.mobileprovision</string>
 				<string>com.apple.provisionprofile</string>
